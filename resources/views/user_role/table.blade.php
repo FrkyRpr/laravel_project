@@ -25,9 +25,9 @@
                         <th>#</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Name Extender</th>
                         <th>Gender</th>
                         <th>Status</th>
                         <th>Actions</th> <!-- Added Actions column -->
@@ -39,13 +39,14 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->password }}</td>
                             <td>{{ $user->firstname }}</td>
                             <td>{{ $user->lastname }}</td>
+                            <td>{{ $user->name_ext }}</td>
                             <td>{{ $user->gender }}</td>
                             <td>{{ $user->status }}</td>
                             <td>
-                                <a href="{{ route('user_role.edit', $user->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                <button class="btn btn-success btn-sm edit-btn" data-url="{{ route('user_role.edit', $user->id) }}">Edit</button>
+
                             </td>
                             <td>
                                 <!-- Delete Button -->
@@ -84,6 +85,13 @@
                     }
                 });
             }
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.edit-btn', function() {
+            var url = $(this).data('url');
+            window.location.href = url;
         });
     </script>
 </body>

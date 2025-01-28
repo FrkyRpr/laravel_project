@@ -59,6 +59,10 @@
                 <input type="text" id="lastname" name="lastname" class="form-control" required>
             </div>
             <div class="mb-3">
+                <label for="name_ext" class="form-label">Name Extender</label>
+                <input type="text" id="name_ext" name="name_ext" class="form-control">
+            </div>
+            <div class="mb-3">
                 <label for="gender" class="form-label">Gender</label>
                 <select id="gender" name="gender" class="form-select" required>
                     <option value="Male">Male</option>

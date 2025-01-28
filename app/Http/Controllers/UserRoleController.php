@@ -29,7 +29,7 @@ class UserRoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('user_role.create');
     }
 
     /**
@@ -56,6 +56,7 @@ class UserRoleController extends Controller
                 'password' => bcrypt($validated['password']),
                 'firstname' => $validated['firstname'],
                 'lastname' => $validated['lastname'],
+                'name_ext' => $request->input('name_ext', ''),
                 'gender' => $validated['gender'],
                 'status' => $validated['status'],
                 'remember_token' => Str::random(10),
@@ -80,8 +81,8 @@ class UserRoleController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::all();
-        return view('user_role.edit',compact('users'));
+        $user = User::findOrFail($id);
+        return view('user_role.edit',compact('user'));
     }
 
     /**
@@ -89,7 +90,9 @@ class UserRoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect()->route('user_role.table')->with('success', 'User updated successfully!');
     }
 
     /**
@@ -98,7 +101,7 @@ class UserRoleController extends Controller
     public function destroy(string $id)
     {
         try{
-            $user = User::findOrFail($id);
+            $user = User::find($id);
             $user -> delete();
             return response()->json(['success' => 'User deleted successfully!']);
         } catch (\Exception $e) {
